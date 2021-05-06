@@ -21,7 +21,7 @@ public class Jdbc01Query01 {
 
 		// 4. Sorgu ifadesini calistiriyoruz
 		// SQL ifadelerini yazabilir ve calistirabiliriz
-		ResultSet isim = st.executeQuery("SELECT personel_isim, maas FROM personel" + " WHERE personel_id = 7566");
+		ResultSet isim = st.executeQuery("SELECT personel_isim, maas FROM personel WHERE personel_id = 7566");
 
 		// 5. Sonuclari goster
 		while (isim.next()) {

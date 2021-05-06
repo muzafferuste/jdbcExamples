@@ -23,6 +23,7 @@ public class jdbc02Query02 {
 		ResultSet tablo1 = st.executeQuery(selectQuery);
 
 		while (tablo1.next()) {
+			
 			System.out.println(tablo1.getInt(1) + " " + tablo1.getString(2) + " " + tablo1.getString(3));
 		}
 
@@ -33,18 +34,21 @@ public class jdbc02Query02 {
 		 * ORNEK1: SATIS ve MUHASABE bolumlerinde calisan personelin isimlerini ve
 		 * maaslarini, maas sıralı olarak listeleyiniz
 		 * -----------------------------------------------------------------------------
-		 * -
 		 */
 
-		String q2 = "SELECT personel_isim, maas" + " FROM personel" + " WHERE bolum_id IN(10, 30)"
+		String q2 = "SELECT personel_isim, maas FROM personel WHERE bolum_id IN(10, 30)"
 				+ " ORDER BY maas DESC";
 
 		ResultSet q2sonuc = st.executeQuery(q2);
 
+		int toplam = 0;
 		while (q2sonuc.next()) {
 
 			System.out.println("Personel isim: " + q2sonuc.getString(1) + " Maas: " + q2sonuc.getInt(2));
+			toplam += q2sonuc.getInt("maas");
 		}
+		
+		System.out.println("mmaslarin toplami: " + toplam);
 
 		System.out.println("=========================");
 

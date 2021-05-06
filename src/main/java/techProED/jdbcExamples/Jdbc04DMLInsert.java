@@ -21,20 +21,11 @@ public class Jdbc04DMLInsert {
 		/*=======================================================================
 		  ORNEK1: Bolumler tablosuna yeni bir kayit (80, 'ARGE', 'ISTANBUL') 
 		  ekleyelim ve eklenen kaydi teyit icin sorgulayalim.
-		========================================================================
-		String s1 = "INSERT INTO bolumler VALUES(80, 'ARGE', 'ISTANBUL')";
-		
-		int st1 = st.executeUpdate(s1);
-		System.out.println(st1 + " adet satir eklendi.");
-		*/
-		ResultSet rs = st.executeQuery("SELECT * FROM bolumler");
-		/*
-		while(rs.next()) {
-            System.out.println("Bölüm ID:" + rs.getInt("bolum_id")+
-            		" "+"Bölüm Isim:" + rs.getString("bolum_isim")+
-            		" "+"Konum:" + rs.getString("konum"));
-        }
-        */
+		========================================================================*/
+//		String s1 = "INSERT INTO bolumler VALUES(80, 'ARGE', 'ISTANBUL')";
+//		
+//		int st1 = st.executeUpdate(s1);
+//		System.out.println(st1 + " adet satir eklendi.");
 		
 		
 		/*=======================================================================
@@ -46,10 +37,28 @@ public class Jdbc04DMLInsert {
      	// yavas yapilmasina yol acar. 10000 tane veri kaydi yapildigi dusunuldugunde
         // bu kotu bir yaklasimdir.
      		
-     	String [] sorgular = {"INSERT INTO bolumler VALUES(95, 'YEMEKHANE', 'ISTANBUL')",
-     		            	  "INSERT INTO bolumler VALUES(85, 'OFIS','ANKARA')",
-     		            	  "INSERT INTO bolumler VALUES(75, 'OFIS2', 'VAN')"};
+     	String [] sorgular1 = {"INSERT INTO bolumler VALUES(81, 'YEMEKHANE2', 'MUS')",
+     		            	  "INSERT INTO bolumler VALUES(82, 'OFIS3','ORDU')",
+     		            	  "INSERT INTO bolumler VALUES(83, 'OFIS4', 'MUGLA')"};
 		
+     	
+     	for (String each : sorgular1) {
+			
+     		st.addBatch(each);
+     		}
+     	
+     	int[] s3 = st.executeBatch();
+     	System.out.println(s3.length + " satir eklendi.");
+     	
+     	
+     	ResultSet rs = st.executeQuery("SELECT * FROM bolumler");
+     	
+     	while(rs.next()) {
+            System.out.println("Bölüm ID:" + rs.getInt("bolum_id")+
+            		" "+"Bölüm Isim:" + rs.getString("bolum_isim")+
+            		" "+"Konum:" + rs.getString("konum"));
+        }
+     	
      	rs.close();
      	st.close();
      	con.close();
